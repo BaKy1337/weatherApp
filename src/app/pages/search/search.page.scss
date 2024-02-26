@@ -1,0 +1,9 @@
+.searchBar{
+    position:relative;
+    .searchIcon{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 2.5rem;
+    }
+}

@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes, CanLoad } from '@angular/router';
+
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    redirectTo: 'meteo',
+    pathMatch: 'full'
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'meteo',
+    loadChildren: () => import('./pages/weather/weather.module').then( m => m.WeatherPageModule)
+  },
+  {
+    path: 'recherche-meteo',
+    loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
   },
 ];
 

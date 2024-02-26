@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { GeolocationService } from './services/geolocation.service';
+import { register } from 'swiper/element/bundle';
+register();
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,7 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private geoloc : GeolocationService) {
+    this.geoloc.getCoordinates();
+  }
 }

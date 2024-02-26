@@ -24,3 +24,83 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+  font-family: Roboto;
+  --ion-font-family: Roboto;
+  font-weight: 400;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+ion-content {
+  --ion-background-color: radial-gradient(
+    circle,
+    rgba(69, 39, 139, 1) 0%,
+    rgba(46, 51, 90, 1) 100%
+  );
+}
+.searchbar-input-container.sc-ion-searchbar-ios {
+  margin: 1rem;
+}
+
+.searchbar-left-aligned.sc-ion-searchbar-ios-h
+  .searchbar-input.sc-ion-searchbar-ios {
+  -webkit-padding-start: 3rem;
+  padding-inline-start: 3rem;
+}
+
+.searchbar-input.sc-ion-searchbar-ios {
+  padding: 1rem 1rem;
+}
+
+.searchbar-has-value.searchbar-should-show-clear.sc-ion-searchbar-ios-h
+  .searchbar-input.sc-ion-searchbar-ios {
+  -webkit-padding-start: 3rem;
+  padding-inline-start: 3rem;
+  -webkit-padding-end: 1rem;
+  padding-inline-end: 1rem;
+}
+
+ion-list {
+  background: transparent !important;
+  --background: transparent !important;
+  ion-item {
+    background: transparent !important;
+    --background: transparent !important;
+  }
+}
+
+ion-item {
+  --border-color: #331e64 !important;
+}
+.searchbar-search-icon { display:none; width:0; height:0; }
+
+.headerWeather{
+  --background:none;
+  position: fixed;
+  
+}
+.toolbar-bg-color {
+  --background: none;
+  --border-color: none;
+  --border-style: none;
+  min-height: 5rem;
+}
+
+.header-background {
+  backdrop-filter: blur(10px);
+}
+
+ion-toast.custom-toast {
+  --background: #ff1648;
+    --box-shadow: 0px 0px 16px 0 rgba(0, 0, 0, 0.2);
+    --color: #Fff;
+}
+
+ion-toast.custom-toast::part(button) {
+  color: #fff;
+}

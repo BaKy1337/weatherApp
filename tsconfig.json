@@ -19,10 +19,14 @@
     "target": "es2022",
     "module": "es2020",
     "lib": [
-      "es2018", 
-      "dom"
+      "es5", "es6", "dom", "dom.iterable"
     ],
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "types" :[
+      "jquery"
+    ],
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,0 +1,325 @@
+<ion-content
+  mode="ios"
+  [scrollEvents]="true"
+  (ionScroll)="handleScroll($any($event))"
+  #pageTop
+>
+  <div class="search">
+    <img
+      src="../../../assets/icons/searchIcon.svg"
+      alt="searchIcon"
+      class="searchIcon"
+      routerLink="/recherche-meteo"
+    />
+  </div>
+  <div *ngIf="!is_weather_loaded; else weatherLoaded" class="skeleton">
+    <div class="city_skeleton"></div>
+    <div class="degree_skeleton"></div>
+    <div class="description_skeleton"></div>
+
+    <div class="full_w_skeleton">
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+    </div>
+    <div class="half_w_skeleton">
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+      <div class="skeleton_box">
+        <div class="skeleton_title"></div>
+        <div class="skeleton_content"></div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #weatherLoaded>
+    <div class="main_infos">
+      <h2 class="cityname">{{this.currentWeather.name}}</h2>
+      <div>
+        <div class="temp">
+          <h2>{{this.currentWeather.main.temp}}</h2>
+        </div>
+        <h3 class="description">{{this.currentWeather.weather.description}}</h3>
+        <div class="tempMinMax">
+          <h4>
+            <ion-icon name="arrow-up-outline"></ion-icon>
+            {{this.currentWeather.main.temp_max}}°
+          </h4>
+          <h4>
+            <ion-icon name="arrow-down-outline"></ion-icon>
+            {{this.currentWeather.main.temp_min}}°
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="boxes fullwidth">
+      <div class="content_fullwidth">
+        <div class="box aqi">
+          <h2 class="title_box">
+            <img src="../../../assets/icons/aqi.svg" /> Qualité de l'air
+          </h2>
+          <div class="content_box">
+            <h2 class="condition">{{this.pollutionObject.quality}}</h2>
+            <input
+              class="rangeAirPollution"
+              type="range"
+              disabled
+              min="0"
+              max="6"
+              value="{{this.pollutionObject.aqi}}"
+            />
+            <p>{{this.pollutionObject.message}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="content_fullwidth">
+        <div class="box forecast">
+          <h2 class="title_box">
+            <img src="../../../assets/icons/clock.svg" /> prévisions toutes les
+            3 heures
+          </h2>
+          <div class="content_box weatherbox">
+            <div class="weather" *ngFor="let weather of this.forecastWeather">
+              <h2>{{weather.hour}}</h2>
+              <img src="{{weather.icon}}" />
+              <h2>{{weather.temp}}°</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boxes halfwidth">
+      <div class="box">
+        <h2 class="title_box">
+          <img src="../../../assets/icons/sunrise.svg" /> lever
+        </h2>
+        <div class="content_box">
+          <h2>{{this.currentWeather.sys.sunrise}}</h2>
+        </div>
+      </div>
+      <div class="box">
+        <h2 class="title_box">
+          <img src="../../../assets/icons/sunset.svg" /> coucher
+        </h2>
+        <div class="content_box">
+          <h2>{{this.currentWeather.sys.sunset}}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="boxes fullwidth">
+      <div class="content_fullwidth">
+        <div class="box clouds">
+          <h2 class="title_box">
+            <img src="../../../assets/icons/cloud.svg" /> couverture
+          </h2>
+          <div class="content_box">
+            <h2>{{this.currentWeather.clouds.val}} %</h2>
+            <p>{{this.currentWeather.clouds.message}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boxes_2">
+      <div class="box vent">
+        <h2 class="title_box">
+          <img src="../../../assets/icons/wind.svg" /> Vent
+        </h2>
+        <div class="content_box">
+          <div class="boussole">
+            <span class="n">N</span>
+            <span class="o">O</span>
+            <span class="e">E</span>
+            <span class="s">S</span>
+            <span class="arrow_n"></span>
+            <span class="arrow_o"></span>
+            <span class="arrow_e"></span>
+            <span class="arrow_s"></span>
+            <div class="wind_direction" id="wind_direction"></div>
+            <div class="wind_speed">
+              <h1>
+                <span>{{wind_direction}}</span>
+                <span>{{currentWeather.wind.speed}}</span>
+              </h1>
+              <h2>km/h</h2>
+            </div>
+          </div>
+          <p>{{this.currentWeather.wind.message}}</p>
+        </div>
+      </div>
+
+      <div class="box pression">
+        <h2 class="title_box">
+          <img src="../../../assets/icons/gauge.svg" /> Pression
+        </h2>
+        <div class="content_box">
+          <div class="manometre">
+            <div class="valeurManometre">
+              <div class="hpaMesure" id="hpaMesure"></div>
+              <div class="mesures">
+                <span>{{this.currentWeather.main.pressure.val}}</span>
+                <span>hPa</span>
+              </div>
+            </div>
+          </div>
+          <p>{{this.currentWeather.main.pressure.message}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="boxes_2">
+      <div class="box visibilite">
+        <h2 class="title_box">
+          <img src="../../../assets/icons/eye.svg" /> Visibilité
+        </h2>
+        <div class="content_box">
+          <h2>{{this.currentWeather.visibility.val}}km</h2>
+          <p>{{this.currentWeather.visibility.message}}</p>
+        </div>
+      </div>
+
+      <div class="box humidite">
+        <h2 class="title_box">
+          <img src="../../../assets/icons/humidity.svg" /> Humidité
+        </h2>
+        <div class="content_box">
+          <h2>{{this.currentWeather.main.humidity.val}}%</h2>
+          <p>{{this.currentWeather.main.humidity.message}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="boxes_2">
+      <div class="box ressenti">
+        <h2 class="title_box">
+          <img src="../../../assets/icons/ressenti.svg" /> Ressenti
+        </h2>
+        <div class="content_box">
+          <h2>{{this.currentWeather.main.feels_like.val}}°</h2>
+          <p>{{this.currentWeather.main.feels_like.message}}</p>
+        </div>
+      </div>
+
+      <div class="box precipitation">
+        <h2 class="title_box">
+          <img src="../../../assets/icons/precipitation.svg" /> Précipitations
+        </h2>
+        <div class="content_box">
+          <h2>{{this.currentWeather.precipitation.val}}mm</h2>
+          <p>{{this.currentWeather.precipitation.message}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="presentLocation">
+      Météo pour {{this.currentWeather.name}}, {{this.currentWeather.country}}
+    </div>
+
+    <h2 style="margin: 3rem 1.5rem 1.5rem">D'autres Villes ?</h2>
+
+    <swiper-container
+      pagination="true"
+      pagination-dynamic-bullets="true"
+      space-between="25"
+      slides-per-view="2.5"
+    >
+      <swiper-slide
+        (click)="selectCity('48.85726634312179', '2.3494377325505513')"
+      >
+        <span class="nomVille">paris</span>
+        <span class="nomPays">france</span>
+      </swiper-slide>
+      <swiper-slide
+        (click)="selectCity('51.511435838642505', '-0.124952430816659')"
+      >
+        <span class="nomVille">londres</span>
+        <span class="nomPays">royaume-uni</span>
+      </swiper-slide>
+      <swiper-slide
+        (click)="selectCity('30.045515095589547', '31.23494607856932')"
+      >
+        <span class="nomVille">le caire</span>
+        <span class="nomPays">égypte</span>
+      </swiper-slide>
+      <swiper-slide
+        (click)="selectCity('-22.911296522424106', '-43.168649989469245')"
+      >
+        <span class="nomVille">rio de janeiro</span>
+        <span class="nomPays">brésil</span>
+      </swiper-slide>
+      <swiper-slide
+        (click)="selectCity('41.00468597557858', '28.992257355487567')"
+      >
+        <span class="nomVille">istanbul</span>
+        <span class="nomPays">turquie</span>
+      </swiper-slide>
+      <swiper-slide class="swiperVide"></swiper-slide>
+    </swiper-container>
+
+    <footer>
+      <span>{{currentYear}} &#64; All rights reserved. Made with love by Achraf</span>
+    </footer>
+
+    <div style="height: 15svh"></div>
+  </ng-template>
+
+  <div
+    *ngIf="!is_weather_loaded; else showLittleDetails"
+    id="showLittleDetails"
+    class="showLittleDetails"
+  >
+    <span>-</span>
+  </div>
+
+  <ng-template #showLittleDetails>
+    <div class="showLittleDetails" id="showLittleDetails">
+      <h2>{{this.currentWeather.name}}</h2>
+      <span
+        >{{this.currentWeather.main.temp}}° |
+        {{this.currentWeather.weather.description}}</span
+      >
+    </div>
+  </ng-template>
+</ion-content>

@@ -1,0 +1,12 @@
+<ion-content class="searchPage" mode="ios">
+  <div class="searchBar">
+    <ion-searchbar animated="false" placeholder="Ville" (ionInput)="handleInput($event)"></ion-searchbar>
+    <img class="searchIcon" src="../../../assets/icons/searchIcon.svg" alt="search icon">
+  </div>
+    
+    <ion-list>
+        <ion-item *ngFor="let city of cities_founded.slice(0, 25)">
+          <ion-label (click)="getWeather(city)">{{city.name}}, {{city.country}}</ion-label>
+        </ion-item>
+      </ion-list>
+</ion-content>
