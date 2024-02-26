@@ -284,7 +284,6 @@ export class WeatherPage {
     );
     this.weather.getWeather(lat, lng).subscribe(
       async (weather: any) => {
-        console.log(weather);
         
         this.currentWeather.name = weather.name; //Nom de la ville
         this.currentWeather.weather.description =
