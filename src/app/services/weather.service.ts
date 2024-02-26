@@ -25,7 +25,7 @@ export class WeatherService {
 
   getPollution(lat: any, lng: any): Observable<any[]> {
     const urlPollution =
-      'http://api.openweathermap.org/data/2.5/air_pollution?lat=' +
+      'https://api.openweathermap.org/data/2.5/air_pollution?lat=' +
       lat +
       '&lon=' +
       lng +
@@ -37,7 +37,7 @@ export class WeatherService {
 
   getForecast(lat: any, lng: any): Observable<any> {
     const urlForecast =
-      'http://api.openweathermap.org/data/2.5/forecast?lat=' +
+      'https://api.openweathermap.org/data/2.5/forecast?lat=' +
       lat +
       '&lon=' +
       lng +
